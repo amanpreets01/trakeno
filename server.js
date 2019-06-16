@@ -26,10 +26,9 @@ app.engine('html', require('hbs').__express);
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
 
-
 app.get('/form', (req, res ,next) => {
     console.log('FORM');
-    return res.status(200).send('DONE');
+    res.render('form.html');
 });
 
 app.post('/save' , (req , res , next) => {
@@ -46,8 +45,33 @@ app.post('/save' , (req , res , next) => {
 		});
 	});
 });
+/*
+tracker.use((res) => {
+	console.log(res);
+});*/
+
+
+const trackImg = new Buffer('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
+
+app.get('/api/track/:campaign/:list/:id', (req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'image/gif',
+    'Content-Length': trackImg.length
+  })
+
+  const { campaign, list, id } = req.params 
+  const { things } = req.query
+  
+  // db.save() 
+
+  console.log(things);
+  
+  res.end(trackImg)
+});
+
 
 const port  = process.env.PORT || 3000;
+
 
 app.listen(port , () => {
 	console.log(`Server listening at ${port}`);
