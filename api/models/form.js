@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const formSchema = mongoose.Schema({
 	_id : mongoose.Schema.Types.ObjectId,
 	email:{
-		type : "String",
+		type : String,
 		required : true,
 		unique : true
 	},
 	password : {
-		type : "String",
+		type : String,
 		required : true
 	}
 });

@@ -9,16 +9,15 @@ const cookieParser = require('cookie-parser');
 const MongoClient = require('mongodb').MongoClient;
 const tracker = require('pixel-tracker');
 
-// replace the uri string with your connection string.
-const uri = "mongodb+srv://node-shop:node-shop@cluster0-bui2o.mongodb.net/test?retryWrites=true&w=majority";
-MongoClient.connect(uri,{useNewUrlParser : true}, function(err, client) {
-   if(err) {
-        console.log('Error occurred while connecting to MongoDB Atlas...\n',err);
-   }
-   else{
-      console.log('Connected...');}
-});
-
+CONNECTION_URL="mongodb+srv://node-shop:node-shop@cluster0-bui2o.mongodb.net/test?retryWrites=true&w=majority"
+MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true }, (error, client) => {
+        if(error) {
+            throw error;
+        }
+        else{
+            console.log("Connected to ");
+        }    
+      });
 app.use(morgan('dev'));
 app.use(cors());
 app.set('views' , __dirname + '/views');
@@ -30,32 +29,34 @@ app.use(cookieParser());
 
 app.get('/form', (req, res) => {
     console.log('FORM');
-    res['req']['cookies']['_tracker'];
+    //res['req']['cookies']['_tracker'];
     res.render('form.html');
 });
 
-app.post('/save' , (req , res , next) => {
-	const user = new Form({
+app.post('/save' , (req , res,next) => {
+	var user = new Form({
 		_id : new mongoose.Types.ObjectId(),
 		email : req.body.email,
 		password : req.body.password
 	});
+  console.log(user);
 	user.save().then((res) => {
-		return res.status(200).json('Done');
+		return res.status(200).send('Done');
 	}).catch((err) => {
+    console.log(err);
 		return res.status(400).json({
 			'message' : "Status failed"
 		});
 	});
 });
 
-/*
-app.all('/pixel' , tracker.middleware);
-tracker.use((err , res) => {
-  console.log(JSON.stringify(res, null, 2))
-}).configure({
-  disable_cookies : false
-});*/
+app.get('/todos' ,(req, res) => {
+  Form.find().then((todos) => {
+    res.send(todos)
+  } , (err) => {
+    res.status(400).send('Not Found');
+  });
+});
 
 const port  = process.env.PORT || 3000;
 
