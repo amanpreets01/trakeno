@@ -5,8 +5,9 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const Form = require('./api/models/Form');
-
+const cookieParser = require('cookie-parser');
 const MongoClient = require('mongodb').MongoClient;
+const tracker = require('pixel-tracker');
 
 // replace the uri string with your connection string.
 const uri = "mongodb+srv://node-shop:node-shop@cluster0-bui2o.mongodb.net/test?retryWrites=true&w=majority";
@@ -25,9 +26,11 @@ app.set('view engine' , 'html');
 app.engine('html', require('hbs').__express);
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
-app.get('/form', (req, res ,next) => {
+app.get('/form', (req, res) => {
     console.log('FORM');
+    res['req']['cookies']['_tracker'];
     res.render('form.html');
 });
 
@@ -45,30 +48,14 @@ app.post('/save' , (req , res , next) => {
 		});
 	});
 });
+
 /*
-tracker.use((res) => {
-	console.log(res);
+app.all('/pixel' , tracker.middleware);
+tracker.use((err , res) => {
+  console.log(JSON.stringify(res, null, 2))
+}).configure({
+  disable_cookies : false
 });*/
-
-
-const trackImg = new Buffer('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
-
-app.get('/api/track/:campaign/:list/:id', (req, res) => {
-  res.writeHead(200, {
-    'Content-Type': 'image/gif',
-    'Content-Length': trackImg.length
-  })
-
-  const { campaign, list, id } = req.params 
-  const { things } = req.query
-  
-  // db.save() 
-
-  console.log(things);
-  
-  res.end(trackImg)
-});
-
 
 const port  = process.env.PORT || 3000;
 
