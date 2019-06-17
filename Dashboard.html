@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: dodgerblue;
+      height: 112%;
+    }
+      
+    /* On small screens, set height to 'auto' for the grid */
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;} 
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse visible-xs">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Trakneo Technologies LLP</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar" >
+      <ul class="nav navbar-nav" >
+        <li class="active" ><a href="#">Dashboard</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav hidden-xs">
+      <h2>Trakneo Technologies LLP</h2>
+      <ul class="nav nav-pills nav-stacked" >
+        <li class="active" ><a href="#section1">Dashboard</a></li>
+      </ul><br>
+    </div>
+    <br>
+    
+    <div class="col-sm-9">
+      <div class="well">
+        <h4>Dashboard</h4>
+        <p>Some text..</p>
+      </div>
+      <div class="row" >
+        <div class="col-sm-3">
+          <div class="well" style="background-color:#F44336;color:#fff;">
+            <h4>No of clients</h4>
+            <p>10</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well" style="background-color:orchid;color:#fff;">
+            <h4>Publisher</h4>
+            <p>20</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well" style="background-color:purple;color:#fff;">
+            <h4>Campaign</h4>
+            <p>10</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well" style="background-color:orange;color:#fff;">
+            <h4>No of clicks</h4>
+            <p>3</p> 
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+  <h2>Tracking Information</h2>
+  <p>Company name, Leads, Conversion:</p>
+  <p><b> search the table for company, leads or conversion:</b></p>  
+  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Company</th>
+        <th>Leads</th>
+        <th>Conversion</th>
+        <th>Links clicked</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tbody id="myTable">
+      <tr>
+        <td>xyz</td>
+        <td>2</td>
+        <td>abc</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>pqr</td>
+        <td>3</td>
+        <td>mnq</td>
+        <td>6</td>
+      </tr>
+      <tr>
+        <td>hij</td>
+        <td>4</td>
+        <td>klm</td>
+        <td>7</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>      
+
+</body>
+</html>
