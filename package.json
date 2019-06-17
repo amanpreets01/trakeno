@@ -17,12 +17,15 @@
     "hbs": "^4.0.4",
     "install": "^0.12.2",
     "lodash": "^4.17.11",
-    "mongodb": "^3.2.7",
+    "mongodb": "^2.2.12",
     "mongoose": "^5.5.15",
     "morgan": "^1.9.1",
     "node-pixel-tracker": "^0.1.0",
     "npm": "^6.9.0",
     "path": "^0.12.7",
     "pixel-tracker": "0.0.5"
+  },
+  "devDependencies": {
+    "dotenv": "^8.0.0"
   }
 }

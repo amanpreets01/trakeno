@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const formSchema = mongoose.Schema({
+const FormSchema = mongoose.Schema({
 	_id : mongoose.Schema.Types.ObjectId,
 	email:{
 		type : String,
@@ -13,4 +13,4 @@ const formSchema = mongoose.Schema({
 	}
 });
 
-module.exports = mongoose.model('Form' , formSchema);
+module.exports = mongoose.model('Form',FormSchema);
