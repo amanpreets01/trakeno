@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>asd</title>
+	
+</head>
+<body>
+	<script type="text/javascript">
+window.onload = (function() {
+  var img, loc, seperator, titleEl, titleText, url;
+
+  if (!window.pixel_ping_tracked) {
+
+    loc = window.location;
+    titleEl = document.getElementsByTagName("title").item(0);
+    seperator = "|pixel-ping-break|";
+    titleText = titleEl.text.replace(/#{"\" + seperator}/g, "") || "";
+    url = encodeURIComponent("" + titleText + seperator + loc.protocol + "//" + loc.host + loc.pathname);
+    console.log(url)
+    img = document.createElement('img');
+    img.setAttribute('src', "127.0.0.1:5000/pixel.gif?key=" + url);
+    //127.0.0.1:5000/pixel.gif?key=asd%7Cpixel-ping-break%7Cfile%3A%2F%2F%2FC%3A%2FUsers%2FAdministrator%2FDesktop%2Fpixel%2Fpixel.html
+    img.setAttribute('width', '1');
+    img.setAttribute('height', '1');
+    console.log(document.body);
+    document.body.appendChild(img);
+    window.pixel_ping_tracked = true;
+  }
+
+}).call(this);
+	</script>
+</body>
+</html>
