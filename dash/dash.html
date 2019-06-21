@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+    <link rel="import" href="./includes/base.html">
+    <link rel="stylesheet" type="text/css" href="css/dash.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light text-white">
+        <a class="navbar-brand" href="nav.html">Trakneo LLP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="nav.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="home.html">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="nav.html">Log Out</a>
+            </li>
+        </ul>
+    </nav>
+
+    <a href="dash.html"><button type="button" class="m-2 btn bg-dark text-white">Dashboard</button></a>
+    <a href="campaign.html"><button type="button" class="m-2 btn bg-dark text-white">Campaign</button></a>
+    <button type="button" class="m-2 btn bg-dark text-white">Publisher</button>
+    <button type="button" class="m-2 btn bg-dark text-white">Links Clicked</button>
+    <br><br>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header" style="text-align: center">
+
+                    Visits
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align: center">225,126</h5>
+
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header" style="text-align: center">
+                    Clicks
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align: center">154,852</h5>
+
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header" style="text-align: center">
+                    Conversions
+                </div>
+                <div class="card-body" style="text-align: center">
+                    <h5 class="card-title" style="text-align: center">27,521</h5>
+
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header" style="text-align: center">
+                    Revenue
+                </div>
+                <div class="card-body" style="text-align: center">
+                    <h5 class="card-title" style="text-align: center">$10,564</h5>
+
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header" style="text-align: center">
+                    Cost
+                </div>
+                <div class="card-body" style="text-align: center">
+                    <h5 class="card-title" style="text-align: cente">$92,553</h5>
+                </div>
+
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header" style="text-align: center">
+                    Profit
+                </div>
+                <div class="card-body" style="text-align: center">
+                    <h5 class="card-title" style="text-align: center">$98,527</h5>
+
+                </div>
+            </div>
+        </div>
+    </div><br>
+
+
+    <div class="card text-center" style="padding-top: 10px; width: 50%">
+        <div class="card-headr">
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+
+                    <div class="container">
+                        <input class="form-control" id="myInput" type="text" placeholder="Search.."><br>
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Revenue</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Cost</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Profit</a>
+                        </li>
+
+            </ul>
+            </div>
+
+
+
+            <table class="table table-striped table-striped" id="myTable">
+                <thead>
+                    <tr class="card-header">
+                        <th scope="col">S.No</th>
+                        <th scope="col">Campaigns</th>
+                        <th scope="col">Profit</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>$6035</td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>$8520</td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>$5752</td>
+
+                    </tr>
+
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>Lord</td>
+                        <td>$9522</td>
+
+                    </tr>
+
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>San</td>
+                        <td>$4329</td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+
+
+    </div>
+    <br>
+
+    <script>
+        $(document).ready(function() {
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+
+</body>
