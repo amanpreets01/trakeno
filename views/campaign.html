@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link type="text/css" href="bootstrap-datepicker.css" rel="stylesheet">
+    <link type="text/css" href="style.css" rel="stylesheet">
+
+    <title>New Campaign</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light text-white">
+        <a class="navbar-brand" href="nav.html">Trakneo LLP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="nav.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="home.html">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="nav.html">Log Out</a>
+            </li>
+        </ul>
+    </nav>
+
+    <a href="dash.html"><button type="button" class="m-2 btn bg-dark text-white">Dashboard</button></a>
+    <button type="button" class="m-2 btn bg-dark text-white">Campaign</button>
+    <button type="button" class="m-2 btn bg-dark text-white">Publisher</button>
+    <button type="button" class="m-2 btn bg-dark text-white">Links Clicked</button>
+
+    <div id="envelope">
+        <div class="container">
+            <form name="myform" class="form-group">
+                <h2 style="text-align: center;font-weight: bold; font-size:45px">New Campaign</h2>
+                <div class="jumbotron">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Campaign Name</label>
+                        <input type="text" class="form-control" id="Campaign Name" aria-describedby="emailHelp" placeholder="Enter Campaign Name">
+                    </div>
+                    <label>Select type of Campaigning</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+    iframe
+  </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                        <label class="form-check-label" for="defaultCheck2">
+    imgpixel
+  </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                        <label class="form-check-label" for="defaultCheck3">
+    global postback
+  </label>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="dates">
+                                <label class="control-label" for="datepicker-start">Start Date</label>
+                                <input type="text" class="form-control" id="datepicker-start" autocomplete="off" placeholder="yyyy-mm-dd">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="dates">
+                                <label class="control-label" for="datepicker-end">End Date</label>
+                                <input type="text" class="form-control" id="datepicker-End" autocomplete="off" placeholder="yyyy-mm-dd">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Select publisher</label>
+                        <select class="form-control" id="exampleFormControlSelect1" nsize="2" multiple>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="textarea">Additional details</label>
+                        <textarea class="form-control" id="Addditional details" rows="3"></textarea>
+                    </div>
+                    <div class="col-md-12" style="text-align: center; margin-top:20px;">
+                        <input class="btn btn-primary" type="submit" value="Submit">
+                    </div>
+                </div>
+        </div>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="C:\Users\Lavanya\Documents\Base project\js\bootstrap-datepicker.js" type="text/javascript"></script>
+        <script>
+            $(function() {
+                $('.dates #datepicker-start').datepicker({
+                    'format': 'yyyy-mm-dd',
+                    'autoclose': 'true'
+                });
+
+            });
+        </script>
+        <script>
+            $(function() {
+                $('.dates #datepicker-End').datepicker({
+                    'format': 'yyyy-mm-dd',
+                    'autoclose': 'true'
+                });
+
+            });
+        </script>
+        </script>
+</body>
+
+</html>
