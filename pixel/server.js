@@ -1,8 +1,11 @@
 const express = require('express');
-
 const app = express()
+
+app.set('view engine' , 'html');
+app.engine('html', require('hbs').__express);
+
 app.get('/getPixel' , (req,res) => {
-	res.send('DONE');
+	res.render('pixel.html');
 });
 app.listen(3000 , () => {
 	console.log(`Listening on 3000`)

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>asd</title>
+    
+</head>
+<body>
+    <script type="text/javascript">
+function createCookie(name,value,days) {
+    console.log(value);
+
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime()+(days*24*60*60*1000));
+        var expires = "; expires="+date.toGMTString();
+    }
+    else var expires = "";
+    document.cookie = name+"="+value+"; path=/";
+}
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+window.onload = (function() {
+  var img, loc, seperator, titleEl, titleText, url;
+
+  if (!window.pixel_ping_tracked) {
+
+    loc = window.location;
+    titleEl = document.getElementsByTagName("title").item(0);
+    seperator = "|pixel-ping-break|";
+    titleText = titleEl.text.replace(/#{"\" + seperator}/g, "") || "";
+    //url = "" + titleText + seperator + loc.protocol + "//" + loc.host + loc.pathname;
+    var url = new URL(window.location.href);
+    
+    var guid = function() {
+
+    var nav = window.navigator;
+    var screen = window.screen;
+    var guid = nav.mimeTypes.length;
+    guid += nav.userAgent.replace(/\D+/g, '');
+    guid += nav.plugins.length;
+    guid += screen.height || '';
+    guid += screen.width || '';
+    guid += screen.pixelDepth || '';
+
+    return guid;
+};  
+
+
+    img = document.createElement('img');
+    if(readCookie('user_track')==null){
+        createCookie('user_track',guid());
+        img.src = "http://127.0.0.1:5000/track/save_clicks?key="+url+"&click_id="+readCookie('user_track');
+        //127.0.0.1:5000/pixel.gif?key=asd%7Cpixel-ping-break%7Cfile%3A%2F%2F%2FC%3A%2FUsers%2FAdministrator%2FDesktop%2Fpixel%2Fpixel.html
+        img.setAttribute('width', '1');
+        img.setAttribute('height', '1');
+        document.body.appendChild(img);
+        window.pixel_ping_tracked = true;
+    }
+    else{
+        img.src = "http://127.0.0.1:5000/track/save_visits?key=" + url+"&click_id="+readCookie('user_track');
+        //127.0.0.1:5000/pixel.gif?key=asd%7Cpixel-ping-break%7Cfile%3A%2F%2F%2FC%3A%2FUsers%2FAdministrator%2FDesktop%2Fpixel%2Fpixel.html
+        img.setAttribute('width', '1');
+        img.setAttribute('height', '1');
+        document.body.appendChild(img);
+        window.pixel_ping_tracked = true;
+    }
+    
+  }
+
+}).call(this);
+console.log('Sent');
+    </script>
+    <form>
+        <input type="text" name=""/>
+    </form>
+</body>
+</html>

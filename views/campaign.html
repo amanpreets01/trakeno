@@ -48,52 +48,46 @@
 
     <div id="envelope">
         <div class="container">
-            <form name="myform" class="form-group">
+            <form name="myform" action="/user/savecampaign" method="POST" class="form-group">
                 <h2 style="text-align: center;font-weight: bold; font-size:45px">New Campaign</h2>
                 <div class="jumbotron">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Campaign Name</label>
-                        <input type="text" class="form-control" id="Campaign Name" aria-describedby="emailHelp" placeholder="Enter Campaign Name">
+                        <input type="text" class="form-control" id="Campaign Name" aria-describedby="emailHelp" placeholder="Enter Campaign Name" name="cname">
                     </div>
                     <label>Select type of Campaigning</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="form-check-label" for="defaultCheck1">
-    iframe
-  </label>
+                        <input name="ctype" class="form-check-input" type="checkbox" value="iframe" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">iframe</label>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                        <label class="form-check-label" for="defaultCheck2">
-    imgpixel
-  </label>
+                        <input name="ctype" class="form-check-input" type="checkbox" value="imgpixel" id="defaultCheck2">
+                        <label class="form-check-label" for="defaultCheck2">imgpixel</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                        <label class="form-check-label" for="defaultCheck3">
-    global postback
-  </label>
+                        <input name="ctype" class="form-check-input" type="checkbox" value="global_postback" id="defaultCheck3">
+                        <label class="form-check-label" for="defaultCheck3">global postback</label>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="dates">
                                 <label class="control-label" for="datepicker-start">Start Date</label>
-                                <input type="text" class="form-control" id="datepicker-start" autocomplete="off" placeholder="yyyy-mm-dd">
+                                <input name="cstart" type="text" class="form-control" id="datepicker-start" autocomplete="off" placeholder="yyyy-mm-dd">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="dates">
                                 <label class="control-label" for="datepicker-end">End Date</label>
-                                <input type="text" class="form-control" id="datepicker-End" autocomplete="off" placeholder="yyyy-mm-dd">
+                                <input name="cend" type="text" class="form-control" id="datepicker-End" autocomplete="off" placeholder="yyyy-mm-dd">
                             </div>
                         </div>
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Select publisher</label>
-                        <select class="form-control" id="exampleFormControlSelect1" nsize="2" multiple>
+                        <select name="ptype" class="form-control" id="exampleFormControlSelect1" nsize="2" multiple>
       <option>1</option>
       <option>2</option>
       <option>3</option>
@@ -103,8 +97,8 @@
                     </div>
                     <br>
                     <div class="form-group">
-                        <label for="textarea">Additional details</label>
-                        <textarea class="form-control" id="Addditional details" rows="3"></textarea>
+                        <label for="textarea">Your : URL</label>
+                        <input type="text" name="url" class="form-control" id="Addditional details" ></input>
                     </div>
                     <div class="col-md-12" style="text-align: center; margin-top:20px;">
                         <input class="btn btn-primary" type="submit" value="Submit">
