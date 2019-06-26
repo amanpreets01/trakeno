@@ -6,10 +6,10 @@ const Camp = require('./../models/campaign');
 const mongoose = require("mongoose");
 const MongoClient = require('mongodb').MongoClient;
 const mongo_url = require('./../../db/mongo_connection');
-
+var sess;
 router.get('/form', (req, res,next) => {
     //res['req']['cookies']['_tracker'];
-    res.render('home.html');
+    res.render('home.hbs');
 });
 
 router.post('/dash',(req,res,next)=>{
@@ -17,27 +17,84 @@ router.post('/dash',(req,res,next)=>{
 		email : req.body.email,
 		password : req.body.password
 	});
-	console.log(det.password);
+	var flag=0;
+	var cname;
 	MongoClient.connect(mongo_url , (err,client) => {
 		client.db(process.env.DB).collection("register").findOne({'email':det.email})
 		.then((doc) => {
-			console.log(doc.password,det.password);
 			if(doc.password == det.password){
+				var sess=req.session.user;
 				req.session.user=doc.email;
-				res.render('dash.html',{email:req.session.email});
-				console.log('Sess-->'+req.session.user);
-			}
+				email=req.session.user;
+				email=email.substring(0,email.indexOf('@'));
+				flag=1;
+				}
 			else{
-				res.render('/user/form');
+				flag=0;
+			}
+		})
+		.catch((err) => console.log(err));
+	});
+	// MongoClient.connect(mongo_url , (err,client) => {
+	// 	client.db(process.env.DB).collection("clicks").findOne({'cname':det.email})
+	// 	.then((doc) => {
+			
+	// 	})
+	// 	.catch((err) => console.log(err));
+	// });
+	// MongoClient.connect(mongo_url , (err,client) => {
+	// 	client.db(process.env.DB).collection("visits").findOne({'email':det.email})
+	// 	.then((doc) => {
+	// 		if(doc.password == det.password){
+	// 			var sess=req.session.user;
+	// 			req.session.user=doc.email;
+	// 			email=req.session.user;
+	// 			email=email.substring(0,email.indexOf('@'));
+	// 			flag=1;
+	// 			}
+	// 		else{
+	// 			flag=0;
+	// 		}
+	// 	})
+	// 	.catch((err) => console.log(err));
+	// });
+	// MongoClient.connect(mongo_url , (err,client) => {
+	// 	client.db(process.env.DB).collection("campaign").find({})
+	// 	.then((doc) => {
+	// 		console.log(doc);
+	// 		// if(flag===1){
+	// 		// 	cname=doc.cname;
+	// 		// 	pname=doc.ptype;
+	// 		// 	}
+	// 	})
+	// 	.catch((err) => console.log(err));
+	// });
+	MongoClient.connect(mongo_url , (err,client) => {
+		client.db(process.env.DB).collection("register").findOne({'email':det.email})
+		.then((doc) => {
+			console.log(doc);
+			if(flag===1){
+				// cname=doc.cname;
+				// pname=doc.ptype;
+				res.render('dash.hbs',{email:email});
+				}
+			else{
+				res.render('home');
 			}
 		})
 		.catch((err) => console.log(err));
 	});
 });
-
+router.get('/dash',(req,res,next)=>{
+	console.log("Hello");
+	console.log(sess);
+	// MongoClient.connect(mongo_url,(err,result)=>{
+	// 	client.db(process.env.DB).collection("")
+	// })
+});
 router.get('/campaign' , (req,res) => {
-	res.render('campaign.html');
-})
+	res.render('campaign.hbs');
+});
 
 router.get('/logout',(req,res,next) => {
 	if(req.session.email && req.cookie.user_sid){
@@ -65,7 +122,7 @@ router.post('/form' , (req , res,next) => {
 	MongoClient.connect(mongo_url , (err , client) => {
 		client.db(process.env.DB).collection("register").insertOne(reg)
 		.then((doc) => {
-			return res.render('home.html');
+			return res.render('home.hbs');
 		})
 		.catch(err => console.log(err));
 	});
@@ -85,7 +142,7 @@ router.post('/savecampaign' , (req,res,next) => {
 	MongoClient.connect(mongo_url , (err,client) => {
 		client.db(process.env.DB).collection('campaign').insertOne(det)
 		.then((doc) => {
-			res.render('dash.html')
+			res.render('dash.hbs')
 		})
 		.catch(err => console.log(err));
 	});

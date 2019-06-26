@@ -9,14 +9,19 @@ require('dotenv').config();
 const session=require("express-session");
 const userRoute = require('./../api/routers/user');
 const trackRoute = require('./../api/routers/track');
+const hbs=require('express-handlebars');
+const path=require('path');
+
 
 const router = express.Router();
 
 app.use(morgan('dev'));
 app.use(cors());
-app.set('view engine' , 'html');
+console.log(path.join(__dirname, '../views/'));
+app.engine('hbs',hbs({extname:'hbs',defaultLayout:'layout',layoutsDir:path.join(__dirname, '../views/')}));
+
+app.set('view engine' , 'hbs');
 app.use('/assets',express.static('assets'));
-app.engine('html', require('hbs').__express);
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
