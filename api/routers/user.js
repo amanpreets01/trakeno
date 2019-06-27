@@ -77,6 +77,8 @@ router.post('/dash',(req,res,next)=>{
 	 	.toArray((err, result) => {
 	 		mongo_result.visits = result;    
 	 		return res.json(mongo_result);
+	 		//to render on page
+	 		//return res.render('dash,hbs' , mongo_result);
 	 		next();	
     });
 	});
