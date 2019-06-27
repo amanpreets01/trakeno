@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 const MongoClient = require('mongodb').MongoClient;
 const mongo_url = require('./../../db/mongo_connection');
 var sess;
+var mongo_result = {}
+
 router.get('/form', (req, res,next) => {
     //res['req']['cookies']['_tracker'];
     res.render('home.hbs');
@@ -57,34 +59,33 @@ router.post('/dash',(req,res,next)=>{
 	// 		}
 	// 	})
 	// 	.catch((err) => console.log(err));
-	// });
-	// MongoClient.connect(mongo_url , (err,client) => {
-	// 	client.db(process.env.DB).collection("campaign").find({})
-	// 	.then((doc) => {
-	// 		console.log(doc);
-	// 		// if(flag===1){
-	// 		// 	cname=doc.cname;
-	// 		// 	pname=doc.ptype;
-	// 		// 	}
-	// 	})
-	// 	.catch((err) => console.log(err));
-	// });
-	MongoClient.connect(mongo_url , (err,client) => {
-		client.db(process.env.DB).collection("register").findOne({'email':det.email})
-		.then((doc) => {
-			console.log(doc);
-			if(flag===1){
-				// cname=doc.cname;
-				// pname=doc.ptype;
-				res.render('dash.hbs',{email:email});
-				}
-			else{
-				res.render('home');
-			}
-		})
-		.catch((err) => console.log(err));
+	// });	
+	 MongoClient.connect(mongo_url , (err,client) => {
+	 	client.db(process.env.DB).collection("register").findOne({'email':det.email})
+	 	.then((doc) => {
+	 		mongo_result.email = doc.email;
+	 	});
+	 	client.db(process.env.DB).collection("campaign").find()
+	 	.toArray((err, result) => {
+	 		mongo_result.campaign = result;  
+    });
+	 	client.db(process.env.DB).collection("clicks").find()
+	 	.toArray((err, result) => {
+	 		mongo_result.clicks = result;    	
+    });
+	 	client.db(process.env.DB).collection("visits").find()
+	 	.toArray((err, result) => {
+	 		mongo_result.visits = result;    
+	 		return res.json(mongo_result);
+	 		next();	
+    });
 	});
+	
 });
+
+
+
+
 router.get('/dash',(req,res,next)=>{
 	console.log("Hello");
 	console.log(sess);
@@ -92,9 +93,14 @@ router.get('/dash',(req,res,next)=>{
 	// 	client.db(process.env.DB).collection("")
 	// })
 });
+
+
+
 router.get('/campaign' , (req,res) => {
 	res.render('campaign.hbs');
 });
+
+
 
 router.get('/logout',(req,res,next) => {
 	if(req.session.email && req.cookie.user_sid){
@@ -104,6 +110,9 @@ router.get('/logout',(req,res,next) => {
 		res.redirect('/user/form');
 	}
 });
+
+
+
 
 router.post('/form' , (req , res,next) => {
 	var reg = new register({
