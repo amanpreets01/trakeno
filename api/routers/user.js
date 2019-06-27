@@ -59,23 +59,26 @@ router.post('/dash',(req,res,next)=>{
 	// 	.catch((err) => console.log(err));
 	// });
 	// MongoClient.connect(mongo_url , (err,client) => {
-	// 	client.db(process.env.DB).collection("campaign").find({})
-	// 	.then((doc) => {
-	// 		console.log(doc);
-	// 		// if(flag===1){
-	// 		// 	cname=doc.cname;
-	// 		// 	pname=doc.ptype;
-	// 		// 	}
-	// 	})
-	// 	.catch((err) => console.log(err));
-	// });
+	// 	console.log(client.db(process.env.DB).collection("campaign").find({}))
+	// .then((doc) => {
+		// 	console.log("Campaign: ",doc);
+		// 	// if(flag===1){
+		// 	// 	cname=doc.cname;
+		// 	// 	pname=doc.ptype;
+		// 	// 	}
+		// })
+		// .catch((err) => console.log(err));
+	
+	MongoClient.connect(mongo_url , (err,client) => {
+		client.db(process.env.DB).collection("campaign").find()
+		.toArray((err, result) => {
+   console.log(result);
+   });
+   });
 	MongoClient.connect(mongo_url , (err,client) => {
 		client.db(process.env.DB).collection("register").findOne({'email':det.email})
 		.then((doc) => {
-			console.log(doc);
 			if(flag===1){
-				// cname=doc.cname;
-				// pname=doc.ptype;
 				res.render('dash.hbs',{email:email});
 				}
 			else{
