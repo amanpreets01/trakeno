@@ -7,6 +7,9 @@ const mongoose = require("mongoose");
 const MongoClient = require('mongodb').MongoClient;
 const mongo_url = require('./../../db/mongo_connection');
 var sess;
+var mongo_result = {};
+
+
 router.get('/form', (req, res,next) => {
     //res['req']['cookies']['_tracker'];
     res.render('home.hbs');
@@ -18,76 +21,87 @@ router.post('/dash',(req,res,next)=>{
 		password : req.body.password
 	});
 	var flag=0;
-	var cname;
-	MongoClient.connect(mongo_url , (err,client) => {
-		client.db(process.env.DB).collection("register").findOne({'email':det.email})
-		.then((doc) => {
-			if(doc.password == det.password){
-				var sess=req.session.user;
+
+	 MongoClient.connect(mongo_url , (err,client) => {
+	 	client.db(process.env.DB).collection("register").findOne({'email':det.email})
+	 	.then((doc) => {
+			 mongo_result.email = doc.email;
+			 if(doc.password == det.password){
 				req.session.user=doc.email;
 				email=req.session.user;
-				email=email.substring(0,email.indexOf('@'));
+				emails=email.substring(0,email.indexOf('@'));
 				flag=1;
 				}
 			else{
 				flag=0;
 			}
-		})
-		.catch((err) => console.log(err));
-	});
-	// MongoClient.connect(mongo_url , (err,client) => {
-	// 	client.db(process.env.DB).collection("clicks").findOne({'cname':det.email})
-	// 	.then((doc) => {
+		});
+		 
+	 	client.db(process.env.DB).collection("campaign").find()
+	 	.toArray((err, result) => {
+			 mongo_result.campaign = result;  
+			 
+    });
+	 	client.db(process.env.DB).collection("clicks").find()
+	 	.toArray((err, result) => {
+	 		mongo_result.clicks = result;    	
+    });
+	 	client.db(process.env.DB).collection("visits").find()
+	 	.toArray((err, result) => {
+			 mongo_result.visits = result;
+			 var datas=[];    
 			
-	// 	})
-	// 	.catch((err) => console.log(err));
-	// });
-	// MongoClient.connect(mongo_url , (err,client) => {
-	// 	client.db(process.env.DB).collection("visits").findOne({'email':det.email})
-	// 	.then((doc) => {
-	// 		if(doc.password == det.password){
-	// 			var sess=req.session.user;
-	// 			req.session.user=doc.email;
-	// 			email=req.session.user;
-	// 			email=email.substring(0,email.indexOf('@'));
-	// 			flag=1;
-	// 			}
-	// 		else{
-	// 			flag=0;
-	// 		}
-	// 	})
-	// 	.catch((err) => console.log(err));
-	// });
-	// MongoClient.connect(mongo_url , (err,client) => {
-	// 	console.log(client.db(process.env.DB).collection("campaign").find({}))
-	// .then((doc) => {
-		// 	console.log("Campaign: ",doc);
-		// 	// if(flag===1){
-		// 	// 	cname=doc.cname;
-		// 	// 	pname=doc.ptype;
-		// 	// 	}
-		// })
-		// .catch((err) => console.log(err));
-	
-	MongoClient.connect(mongo_url , (err,client) => {
-		client.db(process.env.DB).collection("campaign").find()
-		.toArray((err, result) => {
-   console.log(result);
-   });
-   });
-	MongoClient.connect(mongo_url , (err,client) => {
-		client.db(process.env.DB).collection("register").findOne({'email':det.email})
-		.then((doc) => {
-			if(flag===1){
-				res.render('dash.hbs',{email:email});
+			 if(flag===1){
+
+				var temp=[];
+				for(var i=0;i<mongo_result['campaign'].length;i++){
+					temp.push(i+1);
+				};datas.push(temp);temp.delete;
+				 var temp=[];
+				for(var i=0;i<mongo_result['campaign'].length;i++){
+					temp.push(mongo_result['campaign'][i]['cname']);
+				};datas.push(temp);temp.delete;
+
+				var temp=[];
+				for(var i=0;i<mongo_result['campaign'].length;i++){
+					var visits=0;
+					for(var j=0;j<mongo_result['visits'].length;j++){
+						if(mongo_result['campaign'][i]['cname']===mongo_result['visits'][j]['cname']){
+							visits=visits+1;
+						}
+					}temp.push(visits);
+				}datas.push(temp);temp.delete;
+
+				var temp=[];
+				for(var i=0;i<mongo_result['campaign'].length;i++){
+					var visits=0;
+					for(var j=0;j<mongo_result['clicks'].length;j++){
+						if(mongo_result['campaign'][i]['cname']===mongo_result['clicks'][j]['cname']){
+							visits=visits+1;
+						}
+					}temp.push(visits);
+				}datas.push(temp);
+				var final=[];
+				for(var i=0;i<mongo_result['campaign'].length;i++){
+					var temp=[];
+					for(var j=0;j<datas.length;j++){
+						temp.push(datas[j][i])
+					}final.push(temp);
 				}
-			else{
-				res.render('home');
-			}
-		})
-		.catch((err) => console.log(err));
+				return res.render('dash.hbs' , {final:final,email:emails});
+			 }
+			 else{
+				 res.render('home.hbs');
+			 }
+	 		next();	
 	});
+	});
+	
 });
+
+
+
+
 router.get('/dash',(req,res,next)=>{
 	console.log("Hello");
 	console.log(sess);
@@ -95,9 +109,14 @@ router.get('/dash',(req,res,next)=>{
 	// 	client.db(process.env.DB).collection("")
 	// })
 });
+
+
+
 router.get('/campaign' , (req,res) => {
 	res.render('campaign.hbs');
 });
+
+
 
 router.get('/logout',(req,res,next) => {
 	if(req.session.email && req.cookie.user_sid){
@@ -107,6 +126,9 @@ router.get('/logout',(req,res,next) => {
 		res.redirect('/user/form');
 	}
 });
+
+
+
 
 router.post('/form' , (req , res,next) => {
 	var reg = new register({

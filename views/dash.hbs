@@ -149,11 +149,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{#each final}}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>$6035</td>
+                        <th scope="row">{{{0}}}</th>
+                        <td>{{{1}}}</td>
+                        <td>{{{2}}}</td>
+                        <td>{{{3}}}</td> 
                     </tr>
+                    {{/each}}
                 </tbody>
             </table>
 
