@@ -20,6 +20,7 @@ router.post('/dash',(req,res,next)=>{
 		email : req.body.email,
 		password : req.body.password
 	});
+	console.log(req.body.email);
 	var flag=0;
 
 	 MongoClient.connect(mongo_url , (err,client) => {
@@ -173,12 +174,12 @@ router.post('/savecampaign' , (req,res,next) => {
 	cstart : req.body.cstart,
 	cend: req.body.cend,
 	ptype : req.body.ptype,
-	url : req.body.url+'&'+'cname='+req.body.cname+'&'+'ptype='+req.body.ptype
+	url : req.body.url+'?'+'cname='+req.body.cname+'&'+'ptype='+req.body.ptype
 	});
 	MongoClient.connect(mongo_url , (err,client) => {
 		client.db(process.env.DB).collection('campaign').insertOne(det)
 		.then((doc) => {
-			res.redirect('/dash');
+			return res.redirect('/user/form');
 		})
 		.catch(err => console.log(err));
 	});
