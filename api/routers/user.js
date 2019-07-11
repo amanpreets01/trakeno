@@ -72,7 +72,7 @@ router.post('/dash',(req,res,next)=>{
 							visits=visits+1;
 						}
 					}temp.push(visits);
-				}datas.push(temp);temp.delete;
+				}datas.push(temp);temp.delete;	
 
 				var temp=[];
 				for(var i=0;i<mongo_result['campaign'].length;i++){
@@ -90,7 +90,7 @@ router.post('/dash',(req,res,next)=>{
 					url = mongo_result['campaign'][i]['url'];
 					temp.push(url);
 				}datas.push(temp);temp.delete;
-
+				console.log(datas);
 				var final=[];
 				for(var i=0;i<mongo_result['campaign'].length;i++){
 					var temp=[];
@@ -99,7 +99,6 @@ router.post('/dash',(req,res,next)=>{
 					}
 					final.push(temp);
 				}
-				console.log(final);
 				return res.render('dash.hbs' , {final:final,email:emails});
 			 }
 			 else{
