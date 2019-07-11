@@ -57,6 +57,7 @@ router.post('/dash',(req,res,next)=>{
 				for(var i=0;i<mongo_result['campaign'].length;i++){
 					temp.push(i+1);
 				};datas.push(temp);temp.delete;
+
 				 var temp=[];
 				for(var i=0;i<mongo_result['campaign'].length;i++){
 					temp.push(mongo_result['campaign'][i]['cname']);
@@ -80,14 +81,24 @@ router.post('/dash',(req,res,next)=>{
 							visits=visits+1;
 						}
 					}temp.push(visits);
-				}datas.push(temp);
+				}datas.push(temp);temp.delete;
+
+				var temp=[];
+				for(var i=0;i<mongo_result['campaign'].length;i++){
+					var url="";
+					url = mongo_result['campaign'][i]['url'];
+					temp.push(url);
+				}datas.push(temp);temp.delete;
+
 				var final=[];
 				for(var i=0;i<mongo_result['campaign'].length;i++){
 					var temp=[];
 					for(var j=0;j<datas.length;j++){
 						temp.push(datas[j][i])
-					}final.push(temp);
+					}
+					final.push(temp);
 				}
+				console.log(final);
 				return res.render('dash.hbs' , {final:final,email:emails});
 			 }
 			 else{
@@ -167,7 +178,7 @@ router.post('/savecampaign' , (req,res,next) => {
 	MongoClient.connect(mongo_url , (err,client) => {
 		client.db(process.env.DB).collection('campaign').insertOne(det)
 		.then((doc) => {
-			res.render('dash.hbs')
+			res.redirect('/dash');
 		})
 		.catch(err => console.log(err));
 	});
