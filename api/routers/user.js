@@ -67,8 +67,8 @@ router.post('/dash',(req,res,next)=>{
 				var temp=[];
 				for(var i=0;i<mongo_result['campaign'].length;i++){
 					var visits=0;
-					for(var j=0;j<mongo_result['visits'].length;j++){
-						if(mongo_result['campaign'][i]['cname']===mongo_result['visits'][j]['cname']){
+					for(var j=0;j<mongo_result['clicks'].length;j++){
+						if(mongo_result['campaign'][i]['cname']===mongo_result['clicks'][j]['cname']){
 							visits=visits+1;
 						}
 					}temp.push(visits);
@@ -77,12 +77,12 @@ router.post('/dash',(req,res,next)=>{
 				var temp=[];
 				for(var i=0;i<mongo_result['campaign'].length;i++){
 					var visits=0;
-					for(var j=0;j<mongo_result['clicks'].length;j++){
-						if(mongo_result['campaign'][i]['cname']===mongo_result['clicks'][j]['cname']){
+					for(var j=0;j<mongo_result['visits'].length;j++){
+						if(mongo_result['campaign'][i]['cname']===mongo_result['visits'][j]['cname']){
 							visits=visits+1;
 						}
 					}temp.push(visits);
-				}datas.push(temp);temp.delete;
+				}datas.push(temp);temp.delete;	
 
 				var temp=[];
 				for(var i=0;i<mongo_result['campaign'].length;i++){

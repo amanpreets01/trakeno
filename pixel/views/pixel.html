@@ -11,6 +11,10 @@ THis entire script can be hosted and asked for the publisher to just include on 
     
 </head>
 <body>
+    <form action="/thank_you">
+    <input type="text" id="text" placeholder="Enter Name: ">
+    <button id="thank" type="submit" value="Submit">Submit</button>
+</form>
     <script type="text/javascript">
 function createCookie(name,value,days) {
     console.log(value);
@@ -72,22 +76,19 @@ window.onload = (function() {
         window.pixel_ping_tracked = true;
     
     var button = document.getElementById('thank');
-    button.on("click" , function(){
+    button.onclick = function(){
         img.src = "http://127.0.0.1:5000/track/save_visits?key=" + url+"&click_id="+readCookie('user_track');
         //127.0.0.1:5000/pixel.gif?key=asd%7Cpixel-ping-break%7Cfile%3A%2F%2F%2FC%3A%2FUsers%2FAdministrator%2FDesktop%2Fpixel%2Fpixel.html
         img.setAttribute('width', '1');
         img.setAttribute('height', '1');
         document.body.appendChild(img);
         window.pixel_ping_tracked = true;
-    });
+    };
   }
 
 }).call(this);
 console.log('Sent');
-    </script>
-<form action="/thank_you">
-    <input type="text" id="text" placeholder="Enter Name: ">
-    <button id="thank" type="submit" value="Submit">Submit</button>
-</form>
+</script>
+
 </body>
 </html>
