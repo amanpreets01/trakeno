@@ -20,7 +20,7 @@
     "install": "^0.12.2",
     "lodash": "^4.17.11",
     "mongodb": "^2.2.12",
-    "mongoose": "^5.5.15",
+    "mongoose": "^5.7.5",
     "morgan": "^1.9.1",
     "node-pixel-tracker": "^0.1.0",
     "nodemon": "^1.19.1",
