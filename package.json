@@ -18,7 +18,7 @@
     "handlebars-form-helpers": "^0.1.4",
     "hbs": "^4.0.4",
     "install": "^0.12.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "mongodb": "^2.2.12",
     "mongoose": "^5.5.15",
     "morgan": "^1.9.1",
